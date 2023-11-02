@@ -78,14 +78,14 @@ class Gilt:
 
         """
 
-        l = []
+        coupon_chars = []
 
         coupon_integer = ""
         for char in text:
             if unicodedata.category(char) != "Nd":
                 break
             coupon_integer = coupon_integer + char
-        l.append(int(coupon_integer))
+        coupon_chars.append(int(coupon_integer))
 
         for char in text:
             match unicodedata.category(char):
@@ -93,13 +93,13 @@ class Gilt:
                     pass
 
                 case "No":
-                    l.append(unicodedata.numeric(char))
+                    coupon_chars.append(unicodedata.numeric(char))
 
                 case "Zs":
                     pass
         coupon = 0
-        for l in l:
-            coupon = coupon + l
+        for coupon_chars in coupon_chars:
+            coupon = coupon + coupon_chars
         return coupon
 
     def coupon_convert_vulgar(self, text) -> float:
@@ -280,7 +280,6 @@ def main(argv):
     print("Out number of Columns: ", cols)
     print("newdf")
     print(newdf.head())
-    # print(newdf.sort_values(by=["days_to_redemption"], ascending=False))
 
     filepath = Path("./out.csv")
     newdf.to_csv(filepath, index=True)
