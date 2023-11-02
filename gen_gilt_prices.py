@@ -167,8 +167,6 @@ def main(argv):
             row = arg
         elif opt in ("-c", "--col"):
             col = arg
-    print("row is ", row)
-    print("col is ", col)
 
     with open("gilts.xml", "r") as f:
         xml = f.read()
@@ -239,8 +237,6 @@ def main(argv):
         )
         g.ticker = Gilt.lookup_ticker(g.isin_code)
 
-    for g in gilt_list:
-        print(g)
 
     data = [
         {
@@ -267,8 +263,6 @@ def main(argv):
         for g in gilt_list
     ]
 
-    print(data)
-
     newdf = pd.DataFrame(data)
     # computing number of rows
     rows = len(newdf.axes[0])
@@ -278,7 +272,6 @@ def main(argv):
 
     print("Out number of Rows: ", rows)
     print("Out number of Columns: ", cols)
-    print("newdf")
     print(newdf.head())
 
     filepath = Path("./out.csv")
